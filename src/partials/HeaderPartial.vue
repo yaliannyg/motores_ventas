@@ -195,7 +195,8 @@
               <nav>
                 <ul>
                   <li>
-                    <a href="index.html">home</a>
+                    <router-link to="/">home</router-link>
+                    
                   </li>
                   <li class="mega_items">
                     <a href="shop-right-sidebar.html">
@@ -241,7 +242,8 @@
                     <a href="#">Vender</a>
                   </li>
                   <li>
-                    <a href="about.html">Crea tu cuenta</a>
+                    <router-link to="/login">Crea tu cuenta</router-link>
+                    
                   </li>
                   <li>
                     <a href="contact.html">Registro</a>
