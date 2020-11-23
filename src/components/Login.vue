@@ -2,29 +2,32 @@
   <!--login area start-->
   <div class="col-lg-6 col-md-6">
     <div class="account_form">
-      <h2>login</h2>
-      <form action="https://demo.hasthemes.com/autima-preview/autima/login.html#">
-        <p>
-          <label>
-            Username or email
-            <span>*</span>
-          </label>
-          <input type="text" />
-        </p>
-        <p>
-          <label>
-            Passwords
-            <span>*</span>
-          </label>
-          <input type="password" />
-        </p>
+      <div class="text-center">
+        <img src="assets/img/carro.png" class alt="login car icon" width="50%" />
+        <h2 class="title">Bienvenido</h2>
+      </div>
+      <form>
+        <icon-input title="Correo Electronico">
+          <template v-slot:icon>
+            <i class="fas fa-envelope icon"></i>
+          </template>
+        </icon-input>
+        <icon-input title="Contraseña">
+          <template v-slot:icon>
+            <i class="fas fa-key icon"></i>
+          </template>
+        </icon-input>
         <div class="login_submit">
-          <a href="https://demo.hasthemes.com/autima-preview/autima/login.html#">Lost your password?</a>
-          <label for="remember">
-            <input id="remember" type="checkbox" />
-            Remember me
+          <a
+            href="https://demo.hasthemes.com/autima-preview/autima/login.html#"
+          >Recuperar Contraseña</a>
+          <button class="login-button ">login</button>
+        <div>
+          <label for="remember">Aun no tienes una cuenta?
+
+          <router-link tag="a" to="/register">Registrate ahora</router-link>
           </label>
-          <button type="submit">login</button>
+        </div>
         </div>
       </form>
     </div>
@@ -33,20 +36,37 @@
 </template>
 
 <script>
+import IconInput from "@/components/IconInput";
+
 export default {
   name: "Login",
-  data () {
-    return {
-
-    }
+  components: {
+    IconInput
   },
-  methods : {
-    async login () {
-      
-    }
+  data() {
+    return {
+      user: {
+        firstName: "f",
+        lastName: "k"
+      }
+    };
+  },
+  methods: {
+    async login() {}
   }
 };
 </script>
 
-<style>
+<style scoped>
+i {
+  font-weight: 900;
+}
+.title {
+  padding: 15px;
+
+  font-weight: bolder;
+}
+.login-button {
+  background-color: #ed981a;
+}
 </style>

@@ -3,9 +3,9 @@
     <default-layout>
       <div class="customer_login mt-32">
         <div class="container">
-          <div class="row">
+          <div class="row justify-content-center">
             <login></login>
-            <register></register>
+            
           </div>
         </div>
       </div>
