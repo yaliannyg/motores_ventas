@@ -1,39 +1,41 @@
 <template>
   <!--register area start-->
   <div class="col-lg-6 col-md-6">
-    <div class="account_form register">
-      <h2>Register</h2>
+    <div class="account_form">
+      <div class="header-form text-center">
+        <div class="text-center content-avatar">
+          <img src="assets/img/logo.png" class alt="logo" />
+          <div>
+            <div class="content-icon">
+              <i class="fas fa-plus icon-logo"></i>
+            </div>
+          </div>
+        </div>
+        <h2 class="title">Registrar para empezar</h2>
+      </div>
       <form>
-        <p>
-          <label>
-            Nombre y Apellido
-            <span>*</span>
-          </label>
-          <input type="text" v-model="displayName" />
-        </p>
-        <p>
-          <label>
-            Correo
-            <span>*</span>
-          </label>
-          <input type="text" v-model="email" />
-        </p>
-        <p>
-          <label>
-            Contraseña
-            <span>*</span>
-          </label>
-          <input type="password" v-model="password" />
-        </p>
-        <p>
-          <label>
-            Repetir Contraseña
-            <span>*</span>
-          </label>
-          <input type="password" v-model="password_confirm" />
-        </p>
-        <div class="login_submit">
-          <button @click="register">Register</button>
+        <icon-input title="Nombre y Apellido">
+          <template v-slot:icon>
+            <i class="fas fa-pencil-alt icon"></i>
+          </template>
+        </icon-input>
+        <icon-input title="Correo">
+          <template v-slot:icon>
+            <i class="fas fa-envelope icon"></i>
+          </template>
+        </icon-input>
+        <icon-input title="Contraseña">
+          <template v-slot:icon>
+            <i class="fas fa-key icon"></i>
+          </template>
+        </icon-input>
+        <icon-input title="Repetir Contraseña">
+          <template v-slot:icon>
+            <i class="fas fa-key icon"></i>
+          </template>
+        </icon-input>
+        <div class="login_submit mt-2">
+          <button>registrar</button>
         </div>
       </form>
     </div>
@@ -42,10 +44,12 @@
 </template>
 
 <script>
-import users from '@/services/app/users'
+import users from "@/services/app/users";
+import IconInput from "@/components/IconInput";
 
 export default {
   name: "Register",
+  components: { IconInput },
   data() {
     return {
       email: "",
@@ -56,11 +60,35 @@ export default {
   },
   methods: {
     register() {
-      users.register(this.email, this.password, this.displayName)
+      users.register(this.email, this.password, this.displayName);
     }
   }
 };
 </script>
 
-<style>
-</style>
+<style scoped>
+.title {
+  padding: 15px;
+  font-weight: bolder;
+}
+.content-avatar {
+  display: flex;
+  margin: auto;
+  width: 40%;
+  border: solid #ed981a 1px;
+  border-radius: 50%;
+}
+
+.content-icon {
+  border-radius: 50%;
+  position: relative;
+  left: -130%;
+  background: #ed981a;
+  top: 70%;
+}
+
+.icon-logo {
+  font-size: 25px;
+  padding: 15px;
+}
+</style>>

@@ -242,7 +242,7 @@
                     <a href="#">Vender</a>
                   </li>
                   <li>
-                    <router-link to="/login">Crea tu cuenta</router-link>
+                    <router-link to="/register">Crea tu cuenta</router-link>
                     
                   </li>
                   <li>

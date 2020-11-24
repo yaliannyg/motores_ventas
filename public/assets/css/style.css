@@ -7588,9 +7588,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   width: 100%;
 }
 .account_form button {
-  background: #ffd54c;
+  background: #ed981a;
   border: 0;
-  color: #ffffff;
+  color: #000;
   display: inline-block;
   font-size: 12px;
   font-weight: 700;
@@ -7602,7 +7602,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   margin-left: 20px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .account_form button:hover {
   background: #333;
@@ -7620,7 +7620,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .login_submit {
-  text-align: right;
+  text-align: center;
+}
+.login_submit button{
+  width: 80%;
+  background-color: #ed981a;
+  
 }
 @media only screen and (max-width: 767px) {
   .login_submit {
