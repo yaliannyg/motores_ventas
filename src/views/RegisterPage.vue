@@ -15,7 +15,7 @@
 
 <script>
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
-import Register from "@/components/Register.vue";
+import Register from "@/components/register/Register";
 
 export default {
   name: "LoginPage",

@@ -1,10 +1,12 @@
 <template>
   <!--register area start-->
   <div class="col-lg-6 col-md-6">
+     <basic-modal></basic-modal>
     <div class="account_form">
       <div class="header-form text-center">
-        <div class="text-center content-avatar">
-          <img src="assets/img/logo.png" class alt="logo" />
+        <div class="text-center content-avatar" @click="show=true">
+          <img v-if="!avatar.length" src="assets/img/logo.png" alt="logo" />
+          <img v-else :src="avatar" class="rounded-circle" alt="logo" />
           <div>
             <div class="content-icon">
               <i class="fas fa-plus icon-logo"></i>
@@ -39,19 +41,26 @@
         </div>
       </form>
     </div>
+    <!--register area end-->
+    <!-- Modal crop -->
+    <modal-crop :show="show" @update="close_modal"  @get_avatar="get_avatar"></modal-crop>
+   
   </div>
-  <!--register area end-->
 </template>
 
 <script>
 import users from "@/services/app/users";
+import ModalCrop from "@/components/register/ModalCrop"
 import IconInput from "@/components/IconInput";
+import BasicModal from "@/components/BasicModal"
 
 export default {
   name: "Register",
-  components: { IconInput },
+  components: { IconInput, ModalCrop, BasicModal },
   data() {
     return {
+      show: false,
+      avatar: '',
       email: "",
       displayName: "",
       password: "",
@@ -61,6 +70,14 @@ export default {
   methods: {
     register() {
       users.register(this.email, this.password, this.displayName);
+    },
+
+    get_avatar (id){
+      
+      this.avatar = id
+    },
+    close_modal (id) {
+      this.show = id
     }
   }
 };
@@ -92,3 +109,5 @@ export default {
   padding: 15px;
 }
 </style>>
+
+

@@ -16,14 +16,14 @@
 <script>
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import Login from "@/components/Login.vue";
-import Register from "@/components/Register.vue";
+// import Register from "@/components/Register.vue";
 
 export default {
   name: "LoginPage",
   components: {
     DefaultLayout,
     Login,
-    Register
+    // Register
   },
   data () {
     return {
