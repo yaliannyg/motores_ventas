@@ -12,8 +12,8 @@
     <div slot="modal-footer" class="modal-footer account_form">
       <!-- <div class="d-flex"> -->
 
-      <button>Aceptar</button>
-      <button style="background-color:#b2b2b2">Cancelar</button>
+      <button @click="condiciones(true)">Aceptar</button>
+      <button @click="condiciones(false)" style="background-color:#b2b2b2">Cancelar</button>
       <!-- </div> -->
     </div>
   </b-modal>
@@ -34,6 +34,13 @@ export default {
         this.$emit("modal-basic", newValue);
       }
     }
+  },
+  methods: {
+    condiciones (value) {
+       
+        this.$emit("condiciones", value);
+    },
+  
   }
 };
 </script>
