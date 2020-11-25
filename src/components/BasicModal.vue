@@ -1,36 +1,61 @@
 <template>
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+  <b-modal
+    v-model="showModal"
+    id="modal-scrollable"
+    scrollable
+    title="Scrollable Content"
+    size="lg"
+    
+  >
+    <div slot="modal-title">{{title}}</div>
+    {{text}}
+    <div slot="modal-footer" class="modal-footer account_form">
+      <!-- <div class="d-flex"> -->
+
+      <button>Aceptar</button>
+      <button style="background-color:#b2b2b2">Cancelar</button>
+      <!-- </div> -->
     </div>
-  </div>
-  </div>
-
+  </b-modal>
 </template>
-
+  
 <script>
 export default {
+  props: ["show", "text", "title"],
   data() {
-    return {
-      text:
-        '1. Your use of the Service is at your sole risk. The service is provided on an "as is" and "as available" basis. 2. Support for Expo services is only available in English, via e-mail. 3. You understand that Expo uses third-party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to run the Service. 4. You must not modify, adapt or hack the Service or modify another website so as to falsely imply that it is associated with the Service, Expo, or any other Expo service. 5. You may use the Expo Pages static hosting service solely as permitted and intended to host your organization pages, personal pages, or project pages, and for no other purpose. You may not use Expo Pages in violation of Expo trademark or other rights or in violation of applicable law. Expo reserves the right at all times to reclaim any Expo subdomain without liability to you. 1. Your use of the Service is at your sole risk. The service is provided on an "as is" and "as available" basis. 2. Support for Expo services is only available in English, via e-mail. 3. You understand that Expo uses third-party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to run the Service. 4. You must not modify, adapt or hack the Service or modify another website so as to falsely imply that it is associated with the Service, Expo, or any other Expo service. 5. You may use the Expo Pages static hosting service solely as permitted and intended to host your organization pages, personal pages, or project pages, and for no other purpose. You may not use Expo Pages in violation of Expo trademark or other rights or in violation of applicable law. Expo reserves the right at all times to reclaim any Expo subdomain without liability to you. 1. Your use of the Service is at your sole risk. The service is provided on an "as is" and "as available" basis. 2. Support for Expo services is only available in English, via e-mail. 3. You understand that Expo uses third-party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to run the Service. 4. You must not modify, adapt or hack the Service or modify another website so as to falsely imply that it is associated with the Service, Expo, or any other Expo service. 5. You may use the Expo Pages static hosting service solely as permitted and intended to host your organization pages, personal pages, or project pages, and for no other purpose. You may not use Expo Pages in violation of Expo trademark or other rights or in violation of applicable law. Expo reserves the right at all times to reclaim any Expo subdomain without liability to you.'
-    };
+    return {};
+  },
+  computed: {
+    showModal: {
+      get: function() {
+        return this.show;
+      },
+      set: function(newValue) {
+        this.$emit("modal-basic", newValue);
+      }
+    }
   }
 };
 </script>
 
 <style>
+.modal-header {
+  justify-content: center;
+  font-weight: bold;
+  color: #ed981a;
+  font-size: 17px;
+  line-height: 17px;
+  margin-bottom: 10px;
+}
+.modal-body {
+  text-align: justify;
+  font-size: 15px;
+}
+.modal-footer {
+  width: 100%;
+  justify-content: space-around;
+}
+.modal-footer button {
+  width: 40%;
+}
 </style>
