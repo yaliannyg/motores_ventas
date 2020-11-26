@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     condiciones (value) {
-       
         this.$emit("condiciones", value);
     },
   

@@ -1,0 +1,27 @@
+
+@import "../scss/style.scss";
+
+
+
+.account_form{
+
+    & input{
+        border: 1px solid $grey_color;
+        height: 40px;
+        max-width: 100%;
+        background: none;
+        width: 100%;
+        padding: 10px;
+        padding-left: 25px;
+        text-align: left;
+    }
+}
+
+
+.login_submit {
+    text-align: center;
+  }
+  .login_submit button {
+    width: 80%;
+    background-color: #ed981a;
+  }

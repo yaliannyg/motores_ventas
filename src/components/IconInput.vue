@@ -5,16 +5,27 @@
       <span>*</span>
     </label>
     <div class="input-icons">
-         <slot name="icon"></slot>
-      
-      <input class="input-field" type="text" />
+      <slot name="icon"></slot>
+
+      <slot name="input_value"></slot>
+      <slot name="helper_value"></slot>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-    props: ['title']
+  props: ["title", "validation", "name"],
+  data() {
+    return {
+      password: ""
+    };
+  },
+  methods: {
+    sendPassword(value) {
+      this.$emit("sendPassword", this.password);
+    }
+  }
 };
 </script>
 
@@ -30,12 +41,5 @@ export default {
 .icon {
   padding: 10px;
   min-width: 50px;
-}
-
-.input-field {
-  width: 100%;
-  padding: 10px;
-  padding-left: 25px;
-  text-align: left;
 }
 </style>
