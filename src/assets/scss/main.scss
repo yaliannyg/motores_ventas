@@ -1,8 +1,6 @@
 
 @import "../scss/style.scss";
 
-
-
 .account_form{
 
     & input{
@@ -15,13 +13,17 @@
         padding-left: 25px;
         text-align: left;
     }
+    .btn-cancel {
+      background-color:#b2b1b2
+    }
 }
 
 
 .login_submit {
-    text-align: center;
-  }
-  .login_submit button {
-    width: 80%;
-    background-color: #ed981a;
-  }
+  text-align: center;
+}
+.login_submit button {
+  width: 80%;
+  background-color: #ed981a;
+}
+

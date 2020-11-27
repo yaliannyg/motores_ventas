@@ -14,57 +14,71 @@
         </div>
         <h2 class="title">Registrar para empezar</h2>
       </div>
-      <form>
-        <icon-input title="Nombre y Apellido">
-          <template v-slot:icon>
-            <i class="fas fa-pencil-alt icon"></i>
-          </template>
-          <template v-slot:input_value>
-            <input class="input-field" type="text" v-model="displayName" />
-          </template>
-        </icon-input>
+      <ValidationObserver v-slot="{ invalid, errors }">
+        <form>
+          <icon-input title="Nombre y Apellido">
+            <template v-slot:icon>
+              <i class="fas fa-pencil-alt icon"></i>
+            </template>
+            <template v-slot:input_value>
+              <ValidationProvider name="Nombre y Apellido" rules="alpha_spaces" v-slot="{ errors }">
+                <input class="input-field" type="text" v-model="displayName" />
+                <span class="text-danger">{{ errors[0]? "Nombre y Apellido Invalido": "" }}</span>
+              </ValidationProvider>
+            </template>
+          </icon-input>
 
-        <icon-input title="Correo">
-          <template v-slot:icon>
-            <i class="fas fa-envelope icon"></i>
-          </template>
-          <template v-slot:input_value>
-            <ValidationProvider name="E-mail" rules="required|email" v-slot="{ errors }">
-              <input class="input-field" type="text" v-model="email" />
-              <span>{{ errors[0] }}</span>
-            </ValidationProvider>
-          </template>
-        </icon-input>
+          <icon-input title="Correo">
+            <template v-slot:icon>
+              <i class="fas fa-envelope icon"></i>
+            </template>
+            <template v-slot:input_value>
+              <ValidationProvider name="Email" rules="email" v-slot="{ errors }">
+                <input class="input-field" type="email" v-model="email" />
+                <span class="text-danger">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </template>
+          </icon-input>
 
-        <icon-input title="Contraseña" @sendPassword="getPassword">
-          <template v-slot:icon>
-            <i class="fas fa-key icon"></i>
-          </template>
+          <icon-input title="Contraseña">
+            <template v-slot:icon>
+              <i class="fas fa-key icon"></i>
+            </template>
+            <template v-slot:input_value>
+              <ValidationProvider
+                name="Contraseña"
+                rules="confirmed:confirmation"
+                v-slot="{ errors }"
+              >
+                <input class="input-field" type="text" v-model="password" />
+                <span class="text-danger">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </template>
+          </icon-input>
 
-          <template v-slot:input_value>
-            <input class="input-field" type="text" v-model="password" />
-          </template>
-        </icon-input>
-
-        <icon-input title="Repetir Contraseña">
-          <template v-slot:icon>
-            <i class="fas fa-key icon"></i>
-          </template>
-          <template v-slot:input_value>
-            <input class="input-field" type="text" v-model="password_confirm" />
-          </template>
-        </icon-input>
-        <div class="login_submit mt-2">
-          <button type="button" @click="register">registrar</button>
-        </div>
-      </form>
+          <icon-input title="Repetir Contraseña">
+            <template v-slot:icon>
+              <i class="fas fa-key icon"></i>
+            </template>
+            <template v-slot:input_value>
+              <ValidationProvider name="Contraseña" vid="confirmation" v-slot="{ errors }">
+                <input class="input-field" type="text" v-model="password_confirm" />
+                <span class="text-danger">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </template>
+          </icon-input>
+          <div class="login_submit mt-2">
+            <button type="button" @click="condiciones(invalid, errors)">registrar</button>
+          </div>
+        </form>
+      </ValidationObserver>
     </div>
     <!--register area end-->
     <!-- Modal crop -->
     <modal-crop :show="show" @update="close_modal" @get_avatar="get_avatar"></modal-crop>
     <basic-modal
       :show="showCondiciones"
-      @condiciones="condiciones"
+      @condiciones="register"
       @modal-basic="showCondiciones = !showCondiciones"
       :text="textTerminosCondiciones"
       :title="'Términos y Condiciones'"
@@ -77,10 +91,10 @@ import users from "@/services/app/users";
 import ModalCrop from "@/components/register/ModalCrop";
 import IconInput from "@/components/IconInput";
 import BasicModal from "@/components/BasicModal";
-import { ValidationProvider } from "vee-validate";
+
 export default {
   name: "Register",
-  components: { IconInput, ModalCrop, BasicModal, ValidationProvider },
+  components: { IconInput, ModalCrop, BasicModal },
   data() {
     return {
       show: false,
@@ -96,25 +110,24 @@ export default {
     };
   },
   methods: {
-    register() {
-      //validar datos
-      //mostrar condiciones
-      this.showCondiciones = true;
+    condiciones(invalidForm, errors) {
+      if (invalidForm) {
+        alert("form invalido");
+      } else this.showCondiciones = true;
     },
-
     get_avatar(id) {
       this.avatar = id;
     },
     close_modal(id) {
       this.show = id;
     },
-    condiciones(value) {
+    register(value) {
       //si value es true
       //registrar usuario
-    },
-    getPassword(value) {
-      console.log("dd", value);
-      this.password = value;
+      if (value) {
+        //true
+        console.log(value);
+      } else this.showCondiciones = false;
     }
   }
 };
@@ -146,12 +159,6 @@ export default {
   font-size: 25px;
   padding: 15px;
 }
-/* .input-field {
-  width: 100%;
-  padding: 10px;
-  padding-left: 25px;
-  text-align: left;
-} */
 </style>
 
 

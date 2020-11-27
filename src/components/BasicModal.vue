@@ -7,13 +7,13 @@
     size="lg"
     
   >
-    <div slot="modal-title">{{title}}</div>
+    <div slot="modal-title"><h3>{{title}}</h3></div>
     {{text}}
     <div slot="modal-footer" class="modal-footer account_form">
       <!-- <div class="d-flex"> -->
 
       <button @click="condiciones(true)">Aceptar</button>
-      <button @click="condiciones(false)" style="background-color:#b2b2b2">Cancelar</button>
+      <button class="btn-cancel" @click="condiciones(false)">Cancelar</button>
       <!-- </div> -->
     </div>
   </b-modal>
