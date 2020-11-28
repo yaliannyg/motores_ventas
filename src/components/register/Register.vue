@@ -45,11 +45,7 @@
               <i class="fas fa-key icon"></i>
             </template>
             <template v-slot:input_value>
-              <ValidationProvider
-                name="Contraseña"
-                rules="confirmed:confirmation"
-                v-slot="{ errors }"
-              >
+              <ValidationProvider name="Contraseña" vid="confirmation" v-slot="{ errors }">
                 <input class="input-field" type="text" v-model="password" />
                 <span class="text-danger">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -61,7 +57,11 @@
               <i class="fas fa-key icon"></i>
             </template>
             <template v-slot:input_value>
-              <ValidationProvider name="Contraseña" vid="confirmation" v-slot="{ errors }">
+              <ValidationProvider
+                name="Contraseña"
+                rules="confirmed:confirmation"
+                v-slot="{ errors }"
+              >
                 <input class="input-field" type="text" v-model="password_confirm" />
                 <span class="text-danger">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -91,6 +91,7 @@ import users from "@/services/app/users";
 import ModalCrop from "@/components/register/ModalCrop";
 import IconInput from "@/components/IconInput";
 import BasicModal from "@/components/BasicModal";
+import { singup, login } from "@/services/app/users";
 import _ from "lodash";
 export default {
   name: "Register",
@@ -126,13 +127,34 @@ export default {
     close_modal(id) {
       this.show = id;
     },
-    register(value) {
+    async register(value) {
       //si value es true
       //registrar usuario
+      let avatar = this.DataURIToBlob(this.avatar);
       if (value) {
-        //true
-        console.log(value);
+        console.log(avatar);
+        let { status, data } = await singup(
+          this.displayName,
+          this.email,
+          this.password,
+          avatar
+        );
+        if (status === 201) {
+          //guardar usuario
+          this.showCondiciones = false;
+        } else {
+          this.dangerToast(data);
+        }
+        console.log(status, data);
       } else this.showCondiciones = false;
+    },
+    DataURIToBlob(dataURI) {
+      var binary = atob(dataURI.split(",")[1]);
+      var array = [];
+      for (var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], { type: "image/jpeg" });
     }
   }
 };

@@ -2,10 +2,11 @@
   <my-upload
     langType="es-MX"
     v-model="showModal"
+    field="img"
     @crop-success="cropSuccess"
     :width="300"
     :height="300"
-    img-format="png"
+    img-format="jpg"
   ></my-upload>
 </template>
 
@@ -32,9 +33,6 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log("a");
-    },
     cropSuccess(imgDataUrl, field) {
       this.$emit("get_avatar", imgDataUrl);
     },
@@ -88,3 +86,4 @@ export default {
   background-color: #ed982ebf;
 }
 </style>
+
