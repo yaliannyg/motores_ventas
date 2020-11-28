@@ -91,7 +91,7 @@ import users from "@/services/app/users";
 import ModalCrop from "@/components/register/ModalCrop";
 import IconInput from "@/components/IconInput";
 import BasicModal from "@/components/BasicModal";
-
+import _ from "lodash";
 export default {
   name: "Register",
   components: { IconInput, ModalCrop, BasicModal },
@@ -111,9 +111,14 @@ export default {
   },
   methods: {
     condiciones(invalidForm, errors) {
-      if (invalidForm) {
-        alert("form invalido");
-      } else this.showCondiciones = true;
+      if (invalidForm) this.dangerToast("Datos invalidos");
+      else if (
+        _.isEmpty(this.displayName) ||
+        _.isEmpty(this.email) ||
+        _.isEmpty(this.password)
+      )
+        this.dangerToast("Datos vacios");
+      else this.showCondiciones = true;
     },
     get_avatar(id) {
       this.avatar = id;

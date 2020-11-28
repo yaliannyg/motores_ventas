@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import './plugins/bootstrap-vue'
 import './assets/scss/main.scss'
+
 import { ValidationObserver, ValidationProvider, setInteractionMode, localize } from 'vee-validate';
 // import en from 'vee-validate/dist/locale/en.json';
 import './utils/rules-validations'
-
+import common from "./utils/common"
 
 // import * as rules from 'vee-validate/dist/rules';
 import App from './App.vue'
@@ -22,7 +23,7 @@ Vue.config.productionTip = false
 // Install components globally
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
-
+Vue.mixin(common)
 new Vue({
   router,
   store,

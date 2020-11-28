@@ -8,14 +8,14 @@
 
 <script>
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
-import Login from '@/components/Login.vue'
+// import Login from '@/components/Login.vue'
 import wordService from '@/services/wordService'
 
 export default {
   name: "Home",
   components: {
     DefaultLayout,
-    Login
+    
   },
   data () {
     return{

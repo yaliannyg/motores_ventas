@@ -28,7 +28,7 @@
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
-              <div class="top_right text-right">
+              <div v-if="user.email" class="top_right text-right">
                 <ul>
                   <li class="top_links">
                     <a href="#">
@@ -46,6 +46,30 @@
                         <a href="wishlist.html">Favoritos</a>
                       </li>
                     </ul>
+                  </li>
+                  <li class="currency">
+                    <a href="#">
+                      $ USD
+                      <i class="ion-ios-arrow-down"></i>
+                    </a>
+                    <ul class="dropdown_currency">
+                      <li>
+                        <a href="#">USD – Dolar</a>
+                      </li>
+                      <li>
+                        <a href="#">Bs – Bolivares</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div v-else class="top_right text-right">
+                <ul>
+                  <li class="top_links">
+                    <router-link to="/login">
+                      <i class="ion-android-person"></i>
+                      Login
+                    </router-link>
                   </li>
                   <li class="currency">
                     <a href="#">
@@ -196,7 +220,6 @@
                 <ul>
                   <li>
                     <router-link to="/">home</router-link>
-                    
                   </li>
                   <li class="mega_items">
                     <a href="shop-right-sidebar.html">
@@ -243,7 +266,6 @@
                   </li>
                   <li>
                     <router-link to="/register">Crea tu cuenta</router-link>
-                    
                   </li>
                   <li>
                     <a href="contact.html">Registro</a>
@@ -275,3 +297,15 @@
     </div>
   </header>
 </template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState(["user"])
+  }
+};
+</script>
+
+<style>
+</style>

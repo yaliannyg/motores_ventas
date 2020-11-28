@@ -15,7 +15,7 @@
 
 <script>
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
-import Login from "@/components/Login.vue";
+import Login from "@/components/login/Login";
 // import Register from "@/components/Register.vue";
 
 export default {

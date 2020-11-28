@@ -6,8 +6,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    user: {}
   },
   mutations: {
+    set_user ( state, payload){
+      console.log(payload)
+      state.user = payload
+    }
   },
   actions: {
   },
