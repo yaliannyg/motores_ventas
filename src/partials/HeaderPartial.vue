@@ -265,7 +265,7 @@
                     <a href="#">Vender</a>
                   </li>
                   <li>
-                    <router-link to="/register">Crea tu cuenta</router-link>
+                    <router-link to="/signup">Crea tu cuenta</router-link>
                   </li>
                   <li>
                     <a href="contact.html">Registro</a>
@@ -299,12 +299,14 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import { logout } from "@/services/app/users";
 
 export default {
   computed: {
-    ...mapState(["user"])
+    ...mapState(["user"]),
+    ...mapGetters([
+    ])
   },
   methods: {
     async logout() {
@@ -314,6 +316,7 @@ export default {
       if (status === 201) {
         localStorage.removeItem("user");
         this.$store.commit("set_user", {});
+        this.$router.push('/login')
       } else this.dangerToast("Error en el servidor");
     }
   }

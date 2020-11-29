@@ -1,5 +1,5 @@
 <template>
-  <!--register area start-->
+  <!--signup area start-->
   <div class="col-lg-6 col-md-6">
     <div class="account_form">
       <div class="header-form text-center">
@@ -46,7 +46,7 @@
             </template>
             <template v-slot:input_value>
               <ValidationProvider name="Contraseña" vid="confirmation" v-slot="{ errors }">
-                <input class="input-field" type="text" v-model="password" />
+                <input class="input-field" type="password" v-model="password" />
                 <span class="text-danger">{{ errors[0] }}</span>
               </ValidationProvider>
             </template>
@@ -62,7 +62,7 @@
                 rules="confirmed:confirmation"
                 v-slot="{ errors }"
               >
-                <input class="input-field" type="text" v-model="password_confirm" />
+                <input class="input-field" type="password" v-model="password_confirm" />
                 <span class="text-danger">{{ errors[0] }}</span>
               </ValidationProvider>
             </template>
@@ -73,12 +73,12 @@
         </form>
       </ValidationObserver>
     </div>
-    <!--register area end-->
+    <!--signup area end-->
     <!-- Modal crop -->
     <modal-crop :show="show" @update="close_modal" @get_avatar="get_avatar"></modal-crop>
     <basic-modal
       :show="showCondiciones"
-      @condiciones="register"
+      @condiciones="signup"
       @modal-basic="showCondiciones = !showCondiciones"
       :text="textTerminosCondiciones"
       :title="'Términos y Condiciones'"
@@ -88,13 +88,14 @@
 
 <script>
 import users from "@/services/app/users";
-import ModalCrop from "@/components/register/ModalCrop";
+import ModalCrop from "@/components/signup/ModalCrop";
 import IconInput from "@/components/IconInput";
 import BasicModal from "@/components/BasicModal";
 import { singup, login } from "@/services/app/users";
 import _ from "lodash";
+
 export default {
-  name: "Register",
+  name: "Signup",
   components: { IconInput, ModalCrop, BasicModal },
   data() {
     return {
@@ -127,11 +128,15 @@ export default {
     close_modal(id) {
       this.show = id;
     },
-    async register(value) {
+    async signup(value) {
       //si value es true
       //registrar usuario
-      let avatar = this.DataURIToBlob(this.avatar);
-      if (value) {
+      if (!value) {
+        this.showCondiciones = false;
+      } else if (_.isEmpty(this.avatar)) {
+        this.dangerToast("Avatar es requerido");
+      } else if (value) {
+        let avatar = this.DataURIToBlob(this.avatar);
         let { status, data } = await singup(
           this.displayName,
           this.email,
@@ -139,13 +144,14 @@ export default {
           avatar
         );
         if (status === 201) {
+          await this.$store.commit("set_user", data);
           //guardar usuario
           this.showCondiciones = false;
+          this.$router.push('/dashboard')
         } else {
           this.dangerToast(data);
         }
-        
-      } else this.showCondiciones = false;
+      }
     },
     DataURIToBlob(dataURI) {
       var binary = atob(dataURI.split(",")[1]);

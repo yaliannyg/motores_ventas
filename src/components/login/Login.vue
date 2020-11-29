@@ -37,7 +37,7 @@
             <button type="button" class="login-button" @click="login(invalid)">Entrar</button>
             <div class="m-0">
               <div class="m-0 d-flex justify-content-center p-0">
-                <router-link tag="a" to="/register">
+                <router-link tag="a" to="/signup">
                   <label for="remember" class="m-0 p-0 text-dark">Aun no tienes una cuenta?</label>
                   Registrate ahora
                 </router-link>
@@ -83,10 +83,9 @@ export default {
 
       let { status, data } = await login(email, password);
       if (status === 200) {
-        console.log("status", status);
-
-        this.$store.commit("set_user", data);
-      }
+        await this.$store.commit("set_user", data);
+        this.$router.push('/dashboard')
+      } else this.dangerToast(data.error);
       // if ((this.user.email === "y") & (this.user.password === "p")) {
       //   this.$store.commit("set_user", this.user);
       // } else console.log("error");

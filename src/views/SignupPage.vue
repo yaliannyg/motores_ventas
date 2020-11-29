@@ -4,7 +4,7 @@
       <div class="customer_login mt-32">
         <div class="container">
           <div class="row justify-content-center">
-            <register></register>
+            <signup></signup>
             
           </div>
         </div>
@@ -15,13 +15,13 @@
 
 <script>
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
-import Register from "@/components/register/Register";
+import Signup from "@/components/signup/Signup";
 
 export default {
   name: "LoginPage",
   components: {
     DefaultLayout,
-    Register
+    Signup
   },
   data () {
     return {

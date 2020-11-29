@@ -1,33 +1,60 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
-import LoginPage from '@/views/LoginPage.vue'
-import RegisterPage from '@/views/RegisterPage.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "@/views/Home.vue";
+import LoginPage from "@/views/LoginPage.vue";
+import SignupPage from "@/views/SignupPage.vue";
+import store from "@/store/index"; // your vuex store
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next();
+    return;
+  }
+
+  next("/login");
+};
+
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isAuthenticated) {
+    next();
+    return;
+  }
+
+  next("/dashboard");
+};
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
   },
   {
-    path: '/login',
-    name: 'LoginPage',
+    path: "/login",
+    name: "LoginPage",
     component: LoginPage,
+    beforeEnter: ifNotAuthenticated,
   },
   {
-    path: '/register',
-    name: 'RegisterPage',
-    component: RegisterPage,
+    path: "/signup",
+    name: "SignupPage",
+    component: SignupPage,
+    beforeEnter: ifNotAuthenticated,
   },
-]
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Home,
+    beforeEnter: ifAuthenticated,
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
