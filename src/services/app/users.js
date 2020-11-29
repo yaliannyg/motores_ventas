@@ -32,4 +32,14 @@ const singup = (displayName,email , password, file) => {
     .catch((err)=>{console.log(err); return err.response})
   }
 
-export { login, singup}
+const logout = (token) => {
+  return axios({
+		method:'put',
+		url:`${endpointBase}/logout`,
+		headers:{'content-type':'multipart/form-data','Authorization': "bearer " + token}
+	})
+	.then((response) => {return response})
+	.catch((err) => {return err.response})
+}
+
+export { login, singup, logout}

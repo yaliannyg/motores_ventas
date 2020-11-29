@@ -132,7 +132,6 @@ export default {
       //registrar usuario
       let avatar = this.DataURIToBlob(this.avatar);
       if (value) {
-        console.log(avatar);
         let { status, data } = await singup(
           this.displayName,
           this.email,
@@ -145,7 +144,7 @@ export default {
         } else {
           this.dangerToast(data);
         }
-        console.log(status, data);
+        
       } else this.showCondiciones = false;
     },
     DataURIToBlob(dataURI) {

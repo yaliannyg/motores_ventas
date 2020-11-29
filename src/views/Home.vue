@@ -24,7 +24,7 @@ export default {
     }
   },
   async created (){
-    console.log(await wordService.getPokemones())
+    // console.log(await wordService.getPokemones())
   }
 };
 </script>

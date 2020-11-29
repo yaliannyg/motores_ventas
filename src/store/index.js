@@ -10,11 +10,18 @@ export default new Vuex.Store({
   },
   mutations: {
     set_user ( state, payload){
-      console.log(payload)
+      localStorage.setItem("user", JSON.stringify(payload))
       state.user = payload
     }
   },
   actions: {
+    set_auth (context, payload) {
+      
+
+    }
+  },
+  getters: {
+
   },
   modules: {
   }

@@ -37,7 +37,7 @@
                     </a>
                     <ul class="dropdown_links">
                       <li>
-                        <a href="checkout.html">Checkout</a>
+                        <a href="#" @click="logout">logout</a>
                       </li>
                       <li>
                         <a href="my-account.html">Dashboard</a>
@@ -300,9 +300,22 @@
 
 <script>
 import { mapState } from "vuex";
+import { logout } from "@/services/app/users";
+
 export default {
   computed: {
     ...mapState(["user"])
+  },
+  methods: {
+    async logout() {
+      console.log("logout");
+      let { status } = await logout(this.user.token);
+
+      if (status === 201) {
+        localStorage.removeItem("user");
+        this.$store.commit("set_user", {});
+      } else this.dangerToast("Error en el servidor");
+    }
   }
 };
 </script>
