@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-          <networks></networks>
+          <networks :loginFb="facebook"></networks>
         </form>
       </ValidationObserver>
     </div>
@@ -55,7 +55,7 @@
 <script>
 import IconInput from "@/components/IconInput";
 import Networks from "@/components/Networks";
-import { login } from "@/services/app/users";
+import { login, loginFb } from "@/services/app/users";
 import _ from "lodash";
 // import {  mapMutations }  from "vuex"
 export default {
@@ -89,6 +89,11 @@ export default {
       // if ((this.user.email === "y") & (this.user.password === "p")) {
       //   this.$store.commit("set_user", this.user);
       // } else console.log("error");
+    },
+    async facebook () {
+      console.log("dkmked")
+       let { status, data } = await loginFb(email,name,photo);
+       console.log(status, data)
     }
   }
 };

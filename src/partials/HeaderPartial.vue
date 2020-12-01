@@ -264,12 +264,10 @@
                   <li>
                     <a href="#">Vender</a>
                   </li>
-                  <li>
+                  <li v-if="!user.email">
                     <router-link to="/signup">Crea tu cuenta</router-link>
                   </li>
-                  <li>
-                    <a href="contact.html">Registro</a>
-                  </li>
+                  
                   <li>
                     <a href="contact.html">Sobre Nosotros</a>
                   </li>
