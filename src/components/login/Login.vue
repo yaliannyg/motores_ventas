@@ -54,8 +54,9 @@
 
 <script>
 import IconInput from "@/components/IconInput";
-import Networks from "@/components/Networks";
-import { login, loginFb } from "@/services/app/users";
+import Networks from "./Networks";
+import { login, loginFb, logout } from "@/services/app/users";
+
 import _ from "lodash";
 // import {  mapMutations }  from "vuex"
 export default {
@@ -84,22 +85,26 @@ export default {
       let { status, data } = await login(email, password);
       if (status === 200) {
         await this.$store.commit("set_user", data);
-        this.$router.push('/dashboard')
+        this.$router.push("/dashboard");
       } else this.dangerToast(data.error);
       // if ((this.user.email === "y") & (this.user.password === "p")) {
       //   this.$store.commit("set_user", this.user);
       // } else console.log("error");
     },
-    async facebook () {
-      console.log("dkmked")
-       let { status, data } = await loginFb(email,name,photo);
-       console.log(status, data)
+    async facebook() {
+      console.log("dkmked");
+      let { status, data } = await loginFb(email, name, photo);
+      console.log(status, data);
     }
   }
 };
 </script>
 
 <style scoped>
+.account_form {
+  position: relative;
+  top: -15%;
+}
 i {
   font-weight: 900;
 }

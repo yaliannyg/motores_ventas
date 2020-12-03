@@ -1,36 +1,34 @@
 <template>
   <div>
-    <default-layout>
+    <partial-layout>
       <div class="customer_login mt-32">
         <div class="container">
           <div class="row justify-content-center">
             <login></login>
-            
           </div>
         </div>
       </div>
-    </default-layout>
+    </partial-layout>
   </div>
 </template>
 
 <script>
-import DefaultLayout from "@/layouts/DefaultLayout.vue";
+import PartialLayout from "@/layouts/PartialLayout.vue";
 import Login from "@/components/login/Login";
-// import Register from "@/components/Register.vue";
 
 export default {
   name: "LoginPage",
   components: {
-    DefaultLayout,
-    Login,
+    PartialLayout,
+    Login
     // Register
   },
-  data () {
+  data() {
     return {
-      email: '',
-      name: '',
-      password: ''
-    }
+      email: "",
+      name: "",
+      password: ""
+    };
   }
 };
 </script>

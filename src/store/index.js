@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import services from "@/services/api";
 
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -16,7 +17,16 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    set_auth(context, payload) {},
+    // async logout(context, payload) {
+    //   let { status } = await logout(context.state.user.token)
+
+    //   if (status === 201) {
+    //     localStorage.removeItem("user");
+    //     this.context.commit("set_user", {});
+    //     this.$router.push("/login");
+    //   } else this.dangerToast("Error en el servidor");
+
+    // },
   },
   getters: {
     isAuthenticated(state, getters) {

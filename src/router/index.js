@@ -1,10 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
+import DashboardPage from "@/views/DashboardPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import SignupPage from "@/views/SignupPage.vue";
 import store from "@/store/index"; // your vuex store
-
+import User from "@/views/dashboard/User"
 Vue.use(VueRouter);
 
 const ifAuthenticated = (to, from, next) => {
@@ -46,8 +47,11 @@ const routes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: Home,
+    component: DashboardPage,
     beforeEnter: ifAuthenticated,
+    children: [
+      { path: '', component: User },
+    ]
   },
 ];
 

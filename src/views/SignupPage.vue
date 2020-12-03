@@ -1,26 +1,25 @@
 <template>
   <div>
-    <default-layout>
+   <partial-layout>
       <div class="customer_login mt-32">
         <div class="container">
           <div class="row justify-content-center">
             <signup></signup>
-            
           </div>
         </div>
       </div>
-    </default-layout>
+    </partial-layout>
   </div>
 </template>
 
 <script>
-import DefaultLayout from "@/layouts/DefaultLayout.vue";
+import PartialLayout from "@/layouts/PartialLayout.vue";
 import Signup from "@/components/signup/Signup";
 
 export default {
   name: "LoginPage",
   components: {
-    DefaultLayout,
+    PartialLayout,
     Signup
   },
   data () {

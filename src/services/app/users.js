@@ -22,7 +22,8 @@ const singup = (displayName, email, password, file) => {
   formData.append("displayName", displayName);
   formData.append("email", email);
   formData.append("password", password);
-  formData.append("file", file, `${displayName}.jpg`);
+  let avatarName = displayName.replaceAll(" ","_")
+  formData.append("file", file, `${avatarName}.jpg`);
 
   console.log("kdkadkd");
   return axios({

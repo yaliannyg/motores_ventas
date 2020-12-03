@@ -6,10 +6,10 @@
       </div>
       <div class="col-6 d-flex justify-content-between">
         <span to="/" @click="google" class="m-1">
-          <img src="../assets/img/icon/google.png" width="100%" />
+          <img src="@/assets/img/icon/google.png" width="100%" />
         </span>
         <span to="/" @click="getFbSdk({appId: 1227832397412659, version: 'v9.0'})" class="m-1">
-          <img src="../assets/img/icon/facebook.png" width="100%" />
+          <img src="@/assets/img/icon/facebook.png" width="100%" />
         </span>
       </div>
     </div>

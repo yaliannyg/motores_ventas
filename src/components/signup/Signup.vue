@@ -1,7 +1,7 @@
 <template>
   <!--signup area start-->
   <div class="col-lg-6 col-md-6">
-    <div class="account_form">
+    <div class="account_form pt-2">
       <div class="header-form text-center">
         <div class="text-center content-avatar" @click="show=true">
           <img v-if="!avatar.length" src="assets/img/logo.png" alt="logo" />
@@ -167,6 +167,10 @@ export default {
 
 
 <style scoped>
+.account_form {
+  position: relative;
+  top: -15%;
+}
 .title {
   padding: 15px;
   font-weight: bolder;

@@ -169,7 +169,7 @@
             & a{
                 font-size: 18px;
                 &:hover{
-                    color: $secondary_color
+                    color: "$secondary_color"
                 }
             }
         }
@@ -285,10 +285,10 @@
 .header_top {
     background: $secondary_color;
     @media #{$large-mobile}{
-        display: none;
+        // display: none;
     }
     @media #{$tablet-device}{
-        display: none;
+        // display: none;
     }
 }
 .top_inner{
@@ -406,6 +406,7 @@
 }
 .top_right > ul > li:hover a:not([href]):not([tabindex]){
     color: $secondary_color;
+    
 }
 
 
@@ -480,12 +481,12 @@
 .logo{
     @media #{$large-mobile}{
         text-align: center;
-        margin-bottom: 21px
+        margin-bottom: 21px;
     }
     & a{
         & img{
              @media #{$large-mobile}{
-                max-width: 135px;
+                max-width: 80px;
             }
         }
     }
@@ -840,10 +841,10 @@
 }
 .main_menu{
     @media #{$tablet-device}{
-        display: none
+        // display: none
     }
     @media #{$large-mobile}{
-        display: none;
+        // display: none;
     }
     & nav{
         & > ul{
@@ -863,6 +864,7 @@
                     }
                     & > a{
                         color: $secondary_color;
+                        
                     }
                 }
                 &:first-child{
