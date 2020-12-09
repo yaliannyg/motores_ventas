@@ -32,7 +32,7 @@
           </icon-input>
           <div class="login_submit">
             <div class="text-align-right">
-              <router-link to="/login">Recuperar Contraseña</router-link>
+              <router-link to="/forgotPassword">Recuperar Contraseña</router-link>
             </div>
             <button type="button" class="login-button" @click="login(invalid)">Entrar</button>
             <div class="m-0">
@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-          <networks :loginFb="facebook"></networks>
+          <networks @fbLogin="facebook"></networks>
         </form>
       </ValidationObserver>
     </div>
@@ -82,19 +82,38 @@ export default {
       else if (_.isEmpty(email) || _.isEmpty(password))
         this.dangerToast("Datos vacios");
 
-      let { status, data } = await login(email, password);
-      if (status === 200) {
-        await this.$store.commit("set_user", data);
-        this.$router.push("/dashboard");
-      } else this.dangerToast(data.error);
+      try {
+        let { status, data } = await login(email, password);
+        if (status === 200) {
+          await this.$store.commit("set_user", data);
+          this.$router.push("/dashboard");
+        } else this.dangerToast(data.error);
+      } catch (error) {
+        console.log(error);
+      }
+
       // if ((this.user.email === "y") & (this.user.password === "p")) {
       //   this.$store.commit("set_user", this.user);
       // } else console.log("error");
     },
-    async facebook() {
-      console.log("dkmked");
-      let { status, data } = await loginFb(email, name, photo);
-      console.log(status, data);
+    async facebook(response) {
+      console.log(response);
+      let { email, picture, name } = response;
+      console.log(email, picture, name);
+      try {
+        let { status, data } = await loginFb(email, name, picture.data.url);
+        if (status === 201) {
+          await this.$store.commit("set_user", data);
+          this.$router.push("/dashboard");
+        } else {
+          this.dangerToast(data.error);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      // finally{
+
+      // }
     }
   }
 };

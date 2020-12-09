@@ -5,10 +5,10 @@
         <span>Inicia sesion con:</span>
       </div>
       <div class="col-6 d-flex justify-content-between">
-        <span to="/" @click="google" class="m-1">
+        <span @click="google" class="m-1">
           <img src="@/assets/img/icon/google.png" width="100%" />
         </span>
-        <span to="/" @click="getFbSdk({appId: 183017743516756, version: 'v9.0'})" class="m-1">
+        <span @click="getFbSdk({appId: 183017743516756, version: 'v9.0'})" class="m-1">
           <img src="@/assets/img/icon/facebook.png" width="100%" />
         </span>
       </div>
@@ -18,7 +18,6 @@
 
 <script>
 export default {
-  props: ["loginFb"],
   methods: {
     google() {
       console.log("google");
@@ -46,36 +45,35 @@ export default {
         /* eslint-enable */
       });
     },
-    getFbSdk(options) {
-      return new Promise(async resolve => {
-        if (window.FB) {
-          window.FB.login(function(response) {
+    async getFbSdk(options) {
+      const dangerToast = this.dangerToast;
+      const vm = this;
+      if (!window.FB) await this.initFbSdk(options);
+      try {
+        window.FB.login(
+          function(response) {
             if (response.authResponse) {
-              console.log("Welcome!  Fetching your information.... ");
-              window.FB.api("/", function(response) {
-                console.log("Good to see you, " , response );
-              });
-            } else {
-              console.log("User cancelled login or did not fully authorize.");
-            }
-          });
-          resolve(window.FB);
-        } else {
-          await this.initFbSdk(options);
-          window.FB.login(function(response) {
-            if (response.authResponse) {
-              console.log("Welcome!  Fetching your information.... ");
-              window.FB.api("/me", function(response) {
-                console.log("Good to see you, " , response );
-              });
-            } else {
-              console.log("User cancelled login or did not fully authorize.");
-            }
-          });
+              let accessToken = response.authResponse.accessToken;
+              console.log(accessToken);
 
-          resolve(window.FB);
-        }
-      });
+              window.FB.api(
+                "/me",
+                "GET",
+                { fields: "email,name, picture.type(large)" },
+                function(response) {
+
+                  vm.$emit("fbLogin", response);
+                }
+              );
+            } else {
+              dangerToast("Inicio de sesión con Facebook cancelado");
+            }
+          },
+          { scope: "email" }
+        );
+      } catch (error) {
+        console.log(`Ha ocurrido un error: ${error}`);
+      }
     }
   }
 };

@@ -76,4 +76,44 @@ const loginFb = (email, displayName, avatar) => {
     });
 };
 
-export { login, singup, logout, loginFb };
+const sendEmail = (email)=>{
+	return axios({
+		method:'post',
+		url:`${endpointBase}/password/recover`,
+		data:{
+			email,
+		}
+	})
+	.then((response) => {return response})
+	.catch((err) => {return err.response})
+};
+
+const sendCode = (email, code)=>{
+	return axios({
+		method:'get',
+		url:`${endpointBase}/password/code`,
+		params:{
+			email,
+			code
+		}
+	})
+	.then((response) => {return response})
+	.catch((err) => {return err.response})
+};
+
+const changePassword = (email, password)=>{
+  console.log(email, password)
+	return axios({
+		method:'put',
+		url:`${endpointBase}/password/reset`,
+		data:{
+			email,
+			password
+		}
+	})
+	.then((response) => {return response})
+	.catch((err) => {return err.response})
+};
+
+
+export { login, singup, logout, loginFb, sendEmail, sendCode, changePassword};

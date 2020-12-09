@@ -30,6 +30,7 @@ export default {
 </script>
 
 <style scoped>
+
 .input-icons i {
   position: absolute;
 }

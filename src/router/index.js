@@ -4,7 +4,8 @@ import Home from "@/views/Home.vue";
 import DashboardPage from "@/views/DashboardPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import SignupPage from "@/views/SignupPage.vue";
-import store from "@/store/index"; // your vuex store
+import ForgotPasswordPage from "@/views/ForgotPasswordPage"
+import store from "@/store/index"; 
 import User from "@/views/dashboard/User"
 Vue.use(VueRouter);
 
@@ -43,6 +44,11 @@ const routes = [
     name: "SignupPage",
     component: SignupPage,
     beforeEnter: ifNotAuthenticated,
+  },
+  {
+    path: "/forgotPassword",
+    name: "forgotPasswordPage",
+    component: ForgotPasswordPage,
   },
   {
     path: "/dashboard",

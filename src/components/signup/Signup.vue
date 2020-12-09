@@ -147,7 +147,7 @@ export default {
           await this.$store.commit("set_user", data);
           //guardar usuario
           this.showCondiciones = false;
-          this.$router.push('/dashboard')
+          this.$router.push("/dashboard");
         } else {
           this.dangerToast(data);
         }
