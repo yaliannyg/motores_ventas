@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import './plugins/bootstrap-vue'
+import './plugins/google'
 import './assets/scss/main.scss'
 
 import { ValidationObserver, ValidationProvider, setInteractionMode, localize } from 'vee-validate';
