@@ -9,11 +9,11 @@
   >
     <div slot="modal-title"><h3>{{title}}</h3></div>
     {{text}}
-    <div slot="modal-footer" class="modal-footer account_form">
+    <div slot="modal-footer" class="modal-footer account_form" >
       <!-- <div class="d-flex"> -->
 
-      <button @click="condiciones(true)">Aceptar</button>
-      <button class="btn-cancel" @click="condiciones(false)">Cancelar</button>
+      <button @click="condiciones(true)" v-if="aceptar" >Aceptar</button>
+      <button class="btn-cancel" @click="condiciones(false)" v-if="aceptar">Cancelar</button>
       <!-- </div> -->
     </div>
   </b-modal>
@@ -21,7 +21,7 @@
   
 <script>
 export default {
-  props: ["show", "text", "title"],
+  props: ["show", "text", "title", "aceptar"],
   data() {
     return {};
   },

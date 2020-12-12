@@ -13,8 +13,15 @@ export default new Vuex.Store({
     set_user(state, payload) {
       localStorage.setItem("user", JSON.stringify(payload));
       state.user = payload;
-      
     },
+    set_avatar(state, payload) {
+      state.user.avatar = payload
+      localStorage.setItem("user", JSON.stringify(state.user));
+    },
+    set_name(state, payload){
+      state.user.displayName = payload
+      localStorage.setItem("user", JSON.stringify(state.user));
+    }
   },
   actions: {
     // async logout(context, payload) {

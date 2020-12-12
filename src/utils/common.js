@@ -17,7 +17,7 @@ export default {
     succesToast(body) {
       this.$bvToast.toast(body, {
         noCloseButton: true,
-        title: `Succes`,
+        title: `Exito`,
         variant: "success",
         solid: true,
       });

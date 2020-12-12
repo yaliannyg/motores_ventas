@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <label>
+  <div class="w-100">
+    <label v-if="title">
       {{title}}
       <span>*</span>
     </label>
