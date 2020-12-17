@@ -12,7 +12,7 @@
     <div slot="modal-footer" class="modal-footer account_form" >
       <!-- <div class="d-flex"> -->
 
-      <button @click="condiciones(true)" v-if="aceptar" >Aceptar</button>
+      <button @click="condiciones(true)" v-if="!aceptar" >Aceptar</button>
       <button class="btn-cancel" @click="condiciones(false)" v-if="aceptar">Cancelar</button>
       <!-- </div> -->
     </div>
