@@ -5,5 +5,5 @@
 
 // const endpointBase = "http://192.168.0.108:8888/app"
 // const endpointBase = "http://localhost:8888/app"
-  const endpointBase = "http://ec2-18-220-124-191.us-east-2.compute.amazonaws.com:8888/"
+  const endpointBase = "https://motoresventas.herokuapp.com"
 export default endpointBase;
