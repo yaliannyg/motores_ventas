@@ -2,7 +2,9 @@
   <div class="partial-layout">
     <header-partial>
       <template v-slot:header_middle>
-        <header-middle></header-middle>
+        <header-middle>
+          <h1 class="display-4">{{title}}</h1>
+        </header-middle>
       </template>
     </header-partial>
     <main class="main">
@@ -18,7 +20,8 @@ export default {
   components: {
     HeaderPartial,
     HeaderMiddle
-  }
+  },
+  props: ["title"]
 };
 </script>
 

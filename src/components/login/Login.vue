@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-          <networks @fbLogin="facebook"></networks>
+          <networks @fbLogin="facebook" @gLogin="google"></networks>
         </form>
       </ValidationObserver>
     </div>
@@ -55,7 +55,7 @@
 <script>
 import IconInput from "@/components/IconInput";
 import Networks from "./Networks";
-import { login, loginFb, logout } from "@/services/app/users";
+import { login, loginFb, logout, loginGg } from "@/services/app/users";
 
 import _ from "lodash";
 // import {  mapMutations }  from "vuex"
@@ -111,9 +111,24 @@ export default {
       } catch (err) {
         console.log(err);
       }
-      // finally{
-
-      // }
+    },
+    async google(profile) {
+       
+      let name =profile.getName();
+      let picture = profile.getImageUrl()
+      let email = profile.getEmail()
+      try {
+        let { status, data } = await loginGg(email, name, picture);
+        console.log(status, data)
+        if (status === 201) {
+          await this.$store.commit("set_user", data);
+          this.$router.push("/dashboard");
+        } else {
+          this.dangerToast(data.error);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 };

@@ -7,6 +7,7 @@ import SignupPage from "@/views/SignupPage.vue";
 import ForgotPasswordPage from "@/views/ForgotPasswordPage"
 import store from "@/store/index"; 
 import User from "@/views/dashboard/User"
+import PoliticasPrivacidad from "@/views/PoliticasPrivacidad"
 Vue.use(VueRouter);
 
 const ifAuthenticated = (to, from, next) => {
@@ -58,6 +59,11 @@ const routes = [
     children: [
       { path: '', component: User },
     ]
+  },
+  {
+    path: "/privacy",
+    name: "PoliticasPrivacidad",
+    component: PoliticasPrivacidad,
   },
 ];
 

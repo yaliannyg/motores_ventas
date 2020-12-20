@@ -21,6 +21,10 @@ export default new Vuex.Store({
     set_name(state, payload){
       state.user.displayName = payload
       localStorage.setItem("user", JSON.stringify(state.user));
+    },
+    set_distance(state, payload){
+      state.user.distance = payload
+      localStorage.setItem("user", JSON.stringify(state.user));
     }
   },
   actions: {

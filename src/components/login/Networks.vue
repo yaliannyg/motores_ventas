@@ -28,32 +28,20 @@ export default {
     return {
       googleSignInParams: {
         client_id:
-          "260452926706-6dc54f3bnrmp7nqd9qs4nkqsm4bc3lam.apps.googleusercontent.com",
-          offlineAccess: false,
-          
+          "686816430047-2ub0erheehivcuqiughnksdubj7jbd03.apps.googleusercontent.com",
+        offlineAccess: false,
+        scope: "profile",
+        prompt: "select_account"
       }
-      // googleSignInParams: {
-      //   clientId:
-      //     "260452926706-6dc54f3bnrmp7nqd9qs4nkqsm4bc3lam.apps.googleusercontent.com", // client ID of type WEB for your server (needed to verify user ID and offline access)
-      //   offlineAccess: false, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-      //   //hostedDomain: '', // specifies a hosted domain restriction
-      //   //loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
-      //   forceConsentPrompt: true // [Android] if you want to show the authorization prompt at each login.
-      //   //accountName: '', // [Android] specifies an account name on the device that should be used
-      //   //iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
-      // }
     };
   },
   methods: {
     onSignInSuccess(googleUser) {
-      // `googleUser` is the GoogleUser object that represents the just-signed-in user.
-      // See https://developers.google.com/identity/sign-in/web/reference#users
-      // const profile = googleUser.getBasicProfile(); // etc etc
-      console.log(googleUser)
+      var profile = googleUser.getBasicProfile();
+      this.$emit("gLogin", profile);
     },
     onSignInError(error) {
-      // `error` contains any error occurred.
-      console.log("OH NOES", error);
+      this.dangerToast("Inicio de sesión con Goggle cancelado");
     },
     initFbSdk(options) {
       return new Promise(resolve => {

@@ -7,10 +7,10 @@
         <i class="fas fa-user"></i>
         <span>Perfil de Usuario</span>
       </b-nav-item>
-      <b-nav-item to="/dashboard/ratio">
+      <!-- <b-nav-item to="/dashboard/ratio">
         <i class="fas fa-map-marker-alt"></i>
         <span>Radio de Busqueda</span>
-      </b-nav-item>
+      </b-nav-item> -->
       <b-nav-item to="/dashboard/garage">
         <i class="fas fa-car"></i>
         <span>Garaje</span>
@@ -19,7 +19,7 @@
         <i class="fas fa-user-shield"></i>
         <span>Terminos y Condiciones</span>
       </b-nav-item>
-      <b-nav-item to="dashboard/privacy">
+      <b-nav-item to="/privacy">
         <i class="fas fa-user-secret"></i>
         <span>Politica de Privacidad</span>
       </b-nav-item>
@@ -27,9 +27,10 @@
     <basic-modal
       :show="showCondiciones"
       @modal-basic="showCondiciones = !showCondiciones"
-      :aceptar="false"
+      :aceptar="true"
       :text="textTerminosCondiciones"
       :title="'Términos y Condiciones'"
+       @condiciones="showCondiciones = !showCondiciones"
     ></basic-modal>
   </div>
 </template>

@@ -6,24 +6,25 @@
         <b-col cols="10" class="m-auto p-2 w-100">
           <div class="account_form">
             <b-row>
-              <!-- <b-col cols="1"></b-col> -->
-              <b-col cols="4" class="text-center">
+              <b-col cols="4" class="text-center m-auto">
                 <b-img :src="user.avatar" fluid alt="Responsive image" @click="show_crop=true"></b-img>
               </b-col>
 
               <b-col cols="8" class="align-self-center">
                 <b-row class="justify-content-center">
-                  <b-col cols="10" class="d-flex border m-2 align-items-center p-3">
-                    <div class>
+                  <b-col cols="11" class="d-flex border m-2 align-items-center pt-3 pb-3 pl-5">
+                    <div class="span-data">
                       <i class="fas fa-user icon mr-2"></i>
                       <span>Nombre</span>
                     </div>
-                    <div class="ml-2 w-75">
-                      <div v-if="inputData" class="w-100">
-                        <span>{{user.displayName}}</span>
-                        <i class="fas fa-pencil-alt icon" @click="changeToInput"></i>
+                    <div class="input-data">
+                      <div v-if="inputData" class="w-100 ml-3">
+                        <span>
+                          <b>{{user.displayName}}</b>
+                        </span>
+                        <i class="fas fa-pencil-alt icon ml-3" @click="changeToInput"></i>
                       </div>
-                      <div v-else class="d-flex align-items-center w-100">
+                      <div v-else class="d-flex align-items-center w-100 ml-2">
                         <icon-input>
                           <template v-slot:input_value>
                             <ValidationProvider
@@ -38,36 +39,79 @@
                             </ValidationProvider>
                           </template>
                         </icon-input>
-                        <i class="fas fa-save icon ml-3" @click="saveNewName"></i>
+                        <i class="fas fa-save icon ml-2" @click="saveNewName"></i>
                       </div>
                     </div>
                   </b-col>
                 </b-row>
-                <b-row class="justify-content-center">
-                  <b-col cols="10" class="d-flex border m-2 align-items-center p-3">
-                    <div>
+                <b-row class="justify-content-center" v-if="user.method == 'normal'">
+                  <b-col cols="11" class="d-flex border m-2 align-items-center pt-3 pb-3 pl-5">
+                    <div class="span-data">
                       <i class="fas fa-key icon mr-2"></i>
-
                       <span>Contraseña</span>
                     </div>
-                    <div class="ml-2 w-75">
-                      <div v-if="inputDataPasswod" class="w-100">
-                        <span>******</span>
-                        <i class="fas fa-key icon mr-2" @click="inputDataPasswod = !inputDataPasswod"></i>
+                    <div class="input-data">
+                      <div v-if="inputDataPasswod" class="w-100 ml-3">
+                        <span>
+                          <b>******</b>
+                        </span>
+                        <i
+                          class="fas fa-pencil-alt icon ml-3"
+                          @click="inputDataPasswod = !inputDataPasswod"
+                        ></i>
                       </div>
-                      <div v-else class="d-flex align-items-center w-100">
+                      <div v-else class="d-flex align-items-center w-100 ml-2">
                         <icon-input>
                           <template v-slot:input_value>
                             <input class="input-field" type="password" v-model="password" />
                           </template>
                         </icon-input>
-                        <i class="fas fa-save icon ml-3" @click="saveNewPassword"></i>
+                        <i class="fas fa-save icon ml-2" @click="saveNewPassword"></i>
                       </div>
                     </div>
                   </b-col>
                 </b-row>
                 <b-row class="justify-content-center">
-                  <b-col cols="10" class="d-flex border m-2">
+                  <b-col cols="11" class="d-flex border m-2 align-items-center pt-3 pb-3 pl-5">
+                    <div class="span-data">
+                      <i class="fas fa-map-marker-alt icon mr-2"></i>
+                      <span>Radio de busqueda</span>
+                    </div>
+                    <div class="input-data">
+                      <div v-if="inputDataRadio" class="w-100 ml-3">
+                        <span>
+                          <b>{{user.distance}}</b>
+                        </span>
+                        <i class="fas fa-pencil-alt icon ml-3" @click="changeToInputRadio"></i>
+                      </div>
+                      <div v-else class="d-flex align-items-center w-100 ml-2">
+                        <div class="input-group">
+                          <input
+                            type="number"
+                            class="form-control w-50 text-center p-0"
+                            
+                            v-model="radio"
+                          />
+                          <div class="input-group-append ml-1">
+                            <button
+                              class="btn btn-outline-secondary rounded"
+                              type="button"
+                              @click="radio--"
+                            >-</button>
+                            <button
+                              class="btn btn-outline-secondary rounded"
+                              type="button"
+                              @click="radio++"
+                            >+</button>
+                          </div>
+                        </div>
+                        <i class="fas fa-save icon ml-2" @click="saveNewRadio"></i>
+                      </div>
+                    </div>
+                  </b-col>
+                </b-row>
+                <b-row class="justify-content-center">
+                  <b-col cols="11" class="d-flex border m-2 align-items-center pt-3 pb-3 pl-5">
                     <div class="m-1">
                       <i class="fas fa-user-tag icon mr-2"></i>
 
@@ -98,7 +142,8 @@ import ModalCrop from "@/components/signup/ModalCrop";
 import {
   changeAvatar,
   changeDisplayname,
-  changePassword
+  changePassword,
+  changeDistance
 } from "@/services/app/users";
 import IconInput from "@/components/IconInput";
 export default {
@@ -114,8 +159,10 @@ export default {
       show_crop: false,
       inputData: true,
       inputDataPasswod: true,
+      inputDataRadio: true,
       displayName: "",
-      password: ""
+      password: "",
+      radio: ""
     };
   },
   methods: {
@@ -143,27 +190,56 @@ export default {
       this.displayName = this.user.displayName;
     },
     async saveNewName() {
-      let { status, data } = await changeDisplayname(
-        this.displayName,
-        this.user
-      );
-      if (status == 201) {
-        await this.$store.commit("set_name", this.displayName);
-        this.inputData = !this.inputData;
-        this.succesToast("Nombre modificado");
-      } else this.dangerToast(data);
+      try {
+        let { status, data } = await changeDisplayname(
+          this.displayName,
+          this.user
+        );
+        if (status == 201) {
+          await this.$store.commit("set_name", this.displayName);
+          this.inputData = !this.inputData;
+          this.succesToast("Nombre modificado");
+        } else this.dangerToast(data);
+      } catch (error) {
+        this.dangerToast("Error en el servidor");
+      }
     },
     async saveNewPassword() {
+      if (this.password > 6) {
+        try {
+          let { status, data } = await changePassword(
+            this.user.email,
+            this.password
+          );
+          if (status === 201) {
+            this.succesToast("Contraseña Guardada");
+            this.inputDataPasswod = !this.inputDataPasswod;
+          } else this.dangerToast(data.error || "Error en el servidor");
+        } catch (err) {
+          this.dangerToast("Error en el servidor");
+        }
+      } else {
+        if (this.password > 0)
+          this.dangerToast("Contraseña debe tener un minimo de 6 caracteres");
+        this.inputDataPasswod = !this.inputDataPasswod;
+      }
+    },
+    changeToInputRadio() {
+      this.inputDataRadio = !this.inputDataRadio;
+      this.radio = this.user.distance;
+    },
+    async saveNewRadio() {
       try {
-        let { status, data } = await changePassword(
-          this.user.email,
-          this.password
+        let { status, data } = await changeDistance(
+          this.radio,
+          this.user
         );
-        if (status === 201) {
-          this.succesToast("Contraseña Guardada");
-          this.inputDataPasswod = !this.inputDataPasswod
-        } else this.dangerToast(data.error || "Error en el servidor");
-      } catch (err) {
+        if (status == 201) {
+          await this.$store.commit("set_distance", this.radio);
+          this.inputDataRadio = !this.inputDataRadio;
+          this.succesToast("Radio modificado");
+        } else this.dangerToast(data);
+      } catch (error) {
         this.dangerToast("Error en el servidor");
       }
     }
@@ -178,5 +254,31 @@ export default {
 .account_form {
   width: 90%;
   padding: 1rem;
+}
+.input-data {
+  width: 60%;
+}
+
+.span-data {
+  width: 35%;
+}
+.account_form button {
+  height: auto;
+  /* height: auto;
+  padding: 0; */
+  /* border:solid 1px black; */
+  border-radius: 0px;
+  margin: 0;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 </style>

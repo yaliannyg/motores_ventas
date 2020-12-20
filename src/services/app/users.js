@@ -76,6 +76,24 @@ const loginFb = (email, displayName, avatar) => {
     });
 };
 
+const loginGg = (email, displayName, avatar) => {
+  return axios({
+    method: "post",
+    url: `${endpointBase}/login/google`,
+    data: {
+      email,
+      displayName,
+      avatar,
+    },
+  })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      return err.response;
+    });
+};
+
 const sendEmail = (email) => {
   return axios({
     method: "post",
@@ -151,26 +169,56 @@ const changeAvatar = (file, user) => {
     });
 };
 
-const changeDisplayname = (displayName, user)=>{
-	return axios({
-		method:'put',
-		url:`${endpointBase}/user/edit/displayName`,
-		params:{
-			displayName
-		},
-		headers:{'content-type':'multipart/form-data','Authorization': "bearer " + user.token}
-	})
-	.then((response) => {return response})
-	.catch((err) => {return err.response})
+const changeDisplayname = (displayName, user) => {
+  return axios({
+    method: "put",
+    url: `${endpointBase}/user/edit/displayName`,
+    params: {
+      displayName,
+    },
+    headers: {
+      "content-type": "multipart/form-data",
+      Authorization: "bearer " + user.token,
+    },
+  })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      return err.response;
+    });
 };
+
+const changeDistance = (distance, user) => {
+  return axios({
+    method: "put",
+    url: `${endpointBase}/user/edit/distance`,
+    params: {
+      distance,
+    },
+    headers: {
+      "content-type": "multipart/form-data",
+      Authorization: "bearer " + user.token
+    },
+  })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      return err.response;
+    });
+};
+
 export {
   login,
   singup,
   logout,
   loginFb,
+  loginGg,
   sendEmail,
   sendCode,
   changePassword,
   changeAvatar,
-  changeDisplayname
+  changeDisplayname,
+  changeDistance
 };

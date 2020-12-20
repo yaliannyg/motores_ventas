@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-layout">
     <b-container fluid class="m-0 p-0 h-100">
-      <b-row class="h-25 m-0 p-0">
+      <b-row class=" m-0 p-0">
         <b-col class="p-0 m-0">
           <header-partial ref="header_top">
             <template v-slot:header_top>
@@ -16,7 +16,7 @@
           </header-partial>
         </b-col>
       </b-row>
-      <b-row class="h-75 m-0 p-0">
+      <b-row class="m-0 mt-5 p-0">
       <b-col class="p-0 m-0">
           <main class="main">
             <slot></slot>
