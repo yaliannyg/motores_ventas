@@ -1,8 +1,8 @@
 <template>
   <dashboard-layout class=" h-100">
     
-      <b-row class="h-100 p-0 m-0">
-        <b-col cols="2 p-0 ">
+      <b-row class="h-100 p-0 mt-5">
+        <b-col cols="2 p-0 " class="align-self-center">
           <lateral-menu></lateral-menu>
         </b-col>
         <b-col cols="10">

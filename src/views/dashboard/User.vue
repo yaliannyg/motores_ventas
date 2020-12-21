@@ -12,7 +12,7 @@
 
               <b-col cols="8" class="align-self-center">
                 <b-row class="justify-content-center">
-                  <b-col cols="11" class="d-flex border m-2 align-items-center pt-3 pb-3 pl-5">
+                  <b-col cols="11" class="d-flex m-2 align-items-center pt-3 pb-3 pl-5 box-data">
                     <div class="span-data">
                       <i class="fas fa-user icon mr-2"></i>
                       <span>Nombre</span>
@@ -45,7 +45,7 @@
                   </b-col>
                 </b-row>
                 <b-row class="justify-content-center" v-if="user.method == 'normal'">
-                  <b-col cols="11" class="d-flex border m-2 align-items-center pt-3 pb-3 pl-5">
+                  <b-col cols="11" class="d-flex m-2 align-items-center pt-3 pb-3 pl-5 box-data">
                     <div class="span-data">
                       <i class="fas fa-key icon mr-2"></i>
                       <span>Contraseña</span>
@@ -72,7 +72,7 @@
                   </b-col>
                 </b-row>
                 <b-row class="justify-content-center">
-                  <b-col cols="11" class="d-flex border m-2 align-items-center pt-3 pb-3 pl-5">
+                  <b-col cols="11" class="d-flex m-2 align-items-center pt-3 pb-3 pl-5 box-data">
                     <div class="span-data">
                       <i class="fas fa-map-marker-alt icon mr-2"></i>
                       <span>Radio de busqueda</span>
@@ -111,7 +111,7 @@
                   </b-col>
                 </b-row>
                 <b-row class="justify-content-center">
-                  <b-col cols="11" class="d-flex border m-2 align-items-center pt-3 pb-3 pl-5">
+                  <b-col cols="11" class="d-flex m-2 align-items-center pt-3 pb-3 pl-5 box-data">
                     <div class="m-1">
                       <i class="fas fa-user-tag icon mr-2"></i>
 
@@ -247,7 +247,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .form-group {
   margin: 1rem;
 }
@@ -270,15 +270,20 @@ export default {
   border-radius: 0px;
   margin: 0;
 }
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  
+.span-data {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  // background: black;
+  /* height: auto;
+  padding: 0; */
+  /* border:solid 1px black; */
+  // border-radius: 0px;
+  // margin: 0;
 }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+.box-data{
+  border: 1px solid #ed981a;
+
 }
 </style>

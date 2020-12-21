@@ -1,8 +1,8 @@
 <template>
   <div class="dashboard-layout">
     <b-container fluid class="m-0 p-0 h-100">
-      <b-row class=" m-0 p-0">
-        <b-col class="p-0 m-0">
+      <!-- <b-row class=" m-0 p-0">
+        <b-col class="p-0 m-0"> -->
           <header-partial ref="header_top">
             <template v-slot:header_top>
               <header-top :user="user">
@@ -14,15 +14,15 @@
               </header-top>
             </template>
           </header-partial>
-        </b-col>
+        <!-- </b-col>
       </b-row>
       <b-row class="m-0 mt-5 p-0">
-      <b-col class="p-0 m-0">
+      <b-col class="p-0 m-0"> -->
           <main class="main">
             <slot></slot>
           </main>
-        </b-col>
-      </b-row>
+        <!-- </b-col>
+      </b-row> -->
     </b-container>
   </div>
 </template>
