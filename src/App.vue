@@ -7,10 +7,10 @@
 
 <script>
 export default {
-  created(){
-    console.log(process.env.SERVER_ENV);
+  // created(){
+  //   console.log(process.env.SERVER_ENV);
     
-  }
+  // }
   // beforeCreate (){
   //   let data = JSON.parse(localStorage.getItem('user'))
   //   console.log("data")
