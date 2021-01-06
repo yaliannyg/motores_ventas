@@ -4,7 +4,10 @@
       <div class="customer_login mt-32">
         <div class="container">
           <div class="row justify-content-center">
-            <login></login>
+            <div class="col-lg-6 col-md-6">
+              <login @loadPage="loadPage"></login>
+            </div>
+            <b-overlay :show="loading" no-wrap style="inset:-200px"></b-overlay>
           </div>
         </div>
       </div>
@@ -27,11 +30,21 @@ export default {
     return {
       email: "",
       name: "",
-      password: ""
+      password: "",
+      loading: false
     };
+  },
+  methods:{
+    loadPage(value){
+      console.log("ddd");
+      this.loading= value
+    }
   }
 };
 </script>
 
-<style>
+<style lang="scss">
+// .b-overlay {
+//   inset: -200px;
+// }
 </style>
