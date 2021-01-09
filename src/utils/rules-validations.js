@@ -23,7 +23,12 @@ extend('between', {
   message: 'Campo Invalido'
 });
 
-extend('confirmed', {
-  ...rules.confirmed,
-  message: 'La contraseña no concuerda con la confirmacion'
+extend('numeric', {
+  ...rules.numeric,
+  message: 'Solo caracteres numericos'
+});
+
+extend('alpha', {
+  ...rules.alpha,
+  
 });

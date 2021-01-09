@@ -7,7 +7,7 @@
       <h2 class="title">Bienvenido</h2>
     </div>
     <ValidationObserver v-slot="{ invalid }">
-      <form>
+      <form >
         <icon-input title="Correo Electronico">
           <template v-slot:icon>
             <i class="fas fa-envelope icon"></i>
@@ -69,7 +69,8 @@ export default {
     return {
       user: {
         email: "",
-        password: ""
+        password: "",
+        // invalid: null
       }
     };
   },
@@ -77,8 +78,11 @@ export default {
     // ...mapMutations(['setUser']),
     async login(invalidForm) {
       let { email, password } = this.user;
-      console.log(email, password);
-      if (invalidForm) this.dangerToast("Datos invalidos");
+      console.log(email, password, invalidForm);
+      if (invalidForm) {
+        console.log("es invalido");
+        this.dangerToast("Datos invalidos");
+      }
       else if (_.isEmpty(email) || _.isEmpty(password))
         this.dangerToast("Datos vacios");
       else {

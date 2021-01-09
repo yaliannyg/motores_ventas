@@ -4,7 +4,7 @@
     <div class="account_form pt-2">
       <div class="header-form text-center">
         <div class="text-center content-avatar" @click="show=true">
-          <img v-if="!avatar.length" src="assets/img/logo.png" alt="logo" />
+          <img v-if="!avatar.length" src="@/assets/img/logo.png" alt="logo" />
           <img v-else :src="avatar" class="rounded-circle" alt="logo" />
           <div>
             <div class="content-icon">
@@ -15,7 +15,7 @@
         <h2 class="title">Registrar para empezar</h2>
       </div>
       <ValidationObserver v-slot="{ invalid, errors }">
-        <form>
+        <form v-on:submit.prevent="onSubmit">
           <icon-input title="Nombre y Apellido">
             <template v-slot:icon>
               <i class="fas fa-pencil-alt icon"></i>
@@ -68,7 +68,7 @@
             </template>
           </icon-input>
           <div class="login_submit mt-2">
-            <button type="button" @click="condiciones(invalid, errors)">registrar</button>
+            <button type="submit" @click="condiciones(invalid, errors)">registrar</button>
           </div>
         </form>
       </ValidationObserver>

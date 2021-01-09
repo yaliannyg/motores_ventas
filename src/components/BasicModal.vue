@@ -12,7 +12,7 @@
     <div slot="modal-footer" class="modal-footer account_form" >
       <!-- <div class="d-flex"> -->
 
-      <button class="btn-cancel" @click="condiciones(false)" v-if="aceptar">Cancelar</button>
+      <button class="btn-cancel" @click="condiciones(false)" v-if="aceptar" @keyup.enter="condiciones(false)">Cancelar</button>
       <button @click="condiciones(true)" v-else >Aceptar</button>
       <!-- </div> -->
     </div>
@@ -37,6 +37,7 @@ export default {
   },
   methods: {
     condiciones (value) {
+      console.log("dddd");
         this.$emit("condiciones", value);
     },
   

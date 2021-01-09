@@ -6,7 +6,7 @@
         <div class="col-lg-3 col-md-3">
           <div class="logo">
             <router-link to="/">
-              <img src="assets/img/logo/logo-mv.png" alt="MotoresVentas" width="50%" />
+              <img src="@/assets/img/logo/logo-mv.png" alt="MotoresVentas" width="50%" />
             </router-link>
           </div>
         </div>

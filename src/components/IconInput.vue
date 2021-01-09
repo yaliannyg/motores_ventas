@@ -4,10 +4,10 @@
       {{title}}
       <span>*</span>
     </label>
-    <div class="input-icons">
+    <div class="input-icons" :class="addClass">
       <slot name="icon"></slot>
 
-      <slot name="input_value"></slot>
+      <slot name="input_value" :class="getWidth"></slot>
       <slot name="helper_value"></slot>
     </div>
   </div>
@@ -15,11 +15,16 @@
 
 <script>
 export default {
-  props: ["title", "validation", "name"],
+  props: ["title", "validation", "name", "addClass"],
   data() {
     return {
       password: ""
     };
+  },
+  computed:{
+    getWidth(){
+      return this.addClass? 'w-100':''
+    }
   },
   methods: {
     sendPassword(value) {

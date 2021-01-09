@@ -36,7 +36,7 @@ export default {
   },
   methods:{
     loadPage(value){
-      console.log("ddd");
+      
       this.loading= value
     }
   }

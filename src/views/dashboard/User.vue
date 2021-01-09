@@ -89,7 +89,6 @@
                           <input
                             type="number"
                             class="form-control w-50 text-center p-0"
-                            
                             v-model="radio"
                           />
                           <div class="input-group-append ml-1">
@@ -111,16 +110,22 @@
                   </b-col>
                 </b-row>
                 <b-row class="justify-content-center">
-                  <b-col cols="11" class="d-flex m-2 align-items-center pt-3 pb-3 pl-5 box-data">
-                    <div class="m-1">
-                      <i class="fas fa-user-tag icon mr-2"></i>
+                  <b-col cols="11" class="d-flex m-2  pt-3 pb-3 pl-5 box-data flex-column">
+                    <div class="d-flex align-self-baseline">
+                      <div class="m-1">
+                        <i class="fas fa-user-tag icon mr-2"></i>
 
-                      <span>Rol:</span>
+                        <span>Rol:</span>
+                      </div>
+                      <div class="m-1 ml-2">
+                        <span>Comprador</span>
+                        <span class="m-2">/</span>
+                        <span>Vendedor</span>
+                      </div>
                     </div>
-                    <div class="m-1 ml-2">
-                      <b-link>Comprador</b-link>
-                      <span class="m-2">/</span>
-                      <b-link>Vendedor</b-link>
+
+                    <div style="margin-left:90px">
+                      <router-link to="/signup/sell">Ser Vendedor</router-link>
                     </div>
                   </b-col>
                 </b-row>
@@ -230,10 +235,7 @@ export default {
     },
     async saveNewRadio() {
       try {
-        let { status, data } = await changeDistance(
-          this.radio,
-          this.user
-        );
+        let { status, data } = await changeDistance(this.radio, this.user);
         if (status == 201) {
           await this.$store.commit("set_distance", this.radio);
           this.inputDataRadio = !this.inputDataRadio;
@@ -282,8 +284,7 @@ export default {
   // margin: 0;
 }
 
-.box-data{
+.box-data {
   border: 1px solid #ed981a;
-
 }
 </style>

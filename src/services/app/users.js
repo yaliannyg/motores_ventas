@@ -198,7 +198,62 @@ const changeDistance = (distance, user) => {
     },
     headers: {
       "content-type": "multipart/form-data",
-      Authorization: "bearer " + user.token
+      Authorization: "bearer " + user.token,
+    },
+  })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      return err.response;
+    });
+};
+
+const getCaptcha = (user) => {
+  return axios({
+    method: "get",
+    url: `${endpointBase}/seniat/captcha`,
+    headers: {
+      "content-type": "multipart/form-data",
+      Authorization: "bearer " + user.token,
+    },
+  })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      return err.response;
+    });
+};
+
+// registro de vendedor
+const sellerSignup = (sellerProperties, user) => {
+  let formData = new FormData();
+  console.log(user);
+  console.log(sellerProperties);
+  formData.append("displayName", user.displayName);
+  formData.append("email", user.email);
+  formData.append(
+    "file",
+    sellerProperties.avatar,
+    `${sellerProperties.name}.jpg`
+  );
+  formData.append("name", sellerProperties.name);
+  formData.append("rifCode", sellerProperties.rifCode);
+  formData.append("rif", sellerProperties.rif);
+  formData.append("phone", sellerProperties.telefono);
+  formData.append("latitude", sellerProperties.latitude);
+  formData.append("longitude", sellerProperties.longitude);
+  formData.append("captcha", sellerProperties.captcha);
+  formData.append("cookie", sellerProperties.cookie);
+
+  return axios({
+    method: "post",
+    url: `${endpointBase}/signup/seller`,
+    data: formData,
+    headers: {
+      "content-type": "multipart/form-data",
+      Authorization: "bearer " + user.token,
     },
   })
     .then((response) => {
@@ -220,5 +275,7 @@ export {
   changePassword,
   changeAvatar,
   changeDisplayname,
-  changeDistance
+  changeDistance,
+  getCaptcha,
+  sellerSignup,
 };
